@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Taccount</string>
+    <string name="new_event">新增事件</string>
 </resources>
