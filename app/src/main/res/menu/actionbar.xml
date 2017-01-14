@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="@string/new_event"
+        android:title="@string/string_newEvent"
         android:id="@+id/action_new"
         app:showAsAction="always"
-        android:icon="@android:drawable/ic_menu_add" />
+        android:icon="@android:drawable/ic_input_add" />
 </menu>

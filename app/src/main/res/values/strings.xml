@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Taccount</string>
-    <string name="new_event">新增事件</string>
+    <string name="string_newEvent">新增事件</string>
+    <string name="string_createEvent">建立事件</string>
+    <string name="string_eventName">名稱</string>
+    <string name="string_hint_eventName">為您的活動命名</string>
+    <string name="string_startDate">開始日期</string>
+    <string name="string_endDate">結束日期</string>
+    <string name="string_hint_chooseStartDate">選擇開始日期</string>
+    <string name="string_hint_chooseEndDate">選擇結束日期</string>
+    <string name="string_format_date">yyyy/MM/dd</string>
 </resources>
