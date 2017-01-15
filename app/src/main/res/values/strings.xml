@@ -3,10 +3,18 @@
     <string name="string_newEvent">新增事件</string>
     <string name="string_createEvent">建立事件</string>
     <string name="string_eventName">名稱</string>
-    <string name="string_hint_eventName">為您的活動命名</string>
+    <string name="string_hint_eventName">為您的行程命名</string>
     <string name="string_startDate">開始日期</string>
     <string name="string_endDate">結束日期</string>
     <string name="string_hint_chooseStartDate">選擇開始日期</string>
     <string name="string_hint_chooseEndDate">選擇結束日期</string>
     <string name="string_format_date">yyyy/MM/dd</string>
+    <string name="string_finish">完成</string>
+    <string name="string_ok">確定</string>
+    <string name="string_dateErrorTitle">錯誤日期</string>
+    <string name="string_dateErrorMessage">開始日期不得晚於結束日期</string>
+    <string name="string_eventNameErrorTitle">錯誤名稱</string>
+    <string name="string_eventNameErrorMessage">名稱不得為空白</string>
+    
+    <string name="string_new_taiwan_dollar">新臺幣</string>
 </resources>
