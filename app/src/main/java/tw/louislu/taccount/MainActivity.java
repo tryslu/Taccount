@@ -8,20 +8,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import tw.louislu.taccount.Model.Event;
 import tw.louislu.taccount.Model.Taccount;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String KEY_EVENT_NAME = "key_event_name";
-    public static final String KEY_EVENT_START_DATE = "key_event_start_date";
-    public static final String KEY_EVENT_END_DATE = "key_event_end_date";
+    public static final String KEY_EVENT = "key_event";
     private static final String TAG = "Debug_Message";
     private static final int NEW_EVENT_REQUEST = 1; // The request code
-    private Taccount _taccount = new Taccount();
     private ListView _eventListView;
     private EventListAdapter _eventListViewAdapter;
+    private Taccount _taccount = new Taccount();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,19 @@ public class MainActivity extends AppCompatActivity {
     private void setListAdapter(){
         _eventListViewAdapter = new EventListAdapter(this, _taccount.getEventList());
         _eventListView.setAdapter(_eventListViewAdapter);
+        _eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                try {
+                    Event _event = _taccount.getEventList().get(i);
+                    Bundle _bundle = new Bundle();
+                    _bundle.putSerializable(KEY_EVENT, _event);
+                    Intent _intent = new Intent(MainActivity.this, EventActivity.class);
+                    _intent.putExtras(_bundle);
+                    startActivity(_intent);
+                }catch (Exception e){}
+            }
+        });
     }
 
     @Override
@@ -55,14 +68,7 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode){
             case NEW_EVENT_REQUEST:
                 if(resultCode == RESULT_OK){
-                    Bundle _bundle = data.getExtras();
-                    Log.d(TAG, "onActivityResult: event name = " + _bundle.getString(KEY_EVENT_NAME));
-                    Log.d(TAG, "onActivityResult: event start date = " + _bundle.getString(KEY_EVENT_START_DATE));
-                    Log.d(TAG, "onActivityResult: event end data = " + _bundle.getString(KEY_EVENT_END_DATE));
-                    Event _event = new Event(_bundle.getString(MainActivity.KEY_EVENT_NAME),
-                            _bundle.getString(MainActivity.KEY_EVENT_START_DATE),
-                            _bundle.getString(MainActivity.KEY_EVENT_END_DATE));
-                    _taccount.addEvent(_event);
+                    _taccount.addEvent((Event) data.getExtras().getSerializable(KEY_EVENT));
                     _eventListViewAdapter.notifyDataSetChanged();
                 }
                 return;
@@ -76,8 +82,10 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.action_new:
                 // New Event
-                Intent _intent = new Intent(this, NewEventActivity.class);
-                startActivityForResult(_intent, NEW_EVENT_REQUEST);
+                try{
+                    Intent _intent = new Intent(this, NewEventActivity.class);
+                    startActivityForResult(_intent, NEW_EVENT_REQUEST);
+                }catch (Exception e){}
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -1,6 +1,6 @@
 package tw.louislu.taccount.Model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,12 +9,12 @@ import java.util.List;
  */
 
 public class Taccount {
-    private List<Event> _eventList = new ArrayList<Event>();
+    private List<Event> _eventList = new LinkedList<Event>();
 
     public Taccount(){}
 
     public void addEvent(Event event){
-        _eventList.add(event);
+        ((LinkedList<Event>)_eventList).addFirst(event);
     }
 
     public List<Event> getEventList(){

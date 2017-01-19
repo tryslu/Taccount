@@ -18,8 +18,10 @@ import tw.louislu.taccount.Model.Event;
  */
 
 public class EventListAdapter extends BaseAdapter {
-    private static final float TEXT_SIZE = 24;
-    private static final int MAX_LINES = 2;
+    private static final float TEXT_SIZE_TITLE = 24;
+    private static final float TEXT_SIZE_DATE = 14;
+    private static final int MAX_LINES = 1;
+    private static final String TILDE = "~";
     private LayoutInflater _layoutInflater;
     private List<Event> _list = new ArrayList<Event>();
 
@@ -53,9 +55,13 @@ public class EventListAdapter extends BaseAdapter {
         }
         TextView _textView = (TextView) _view.findViewById(R.id.eventList_itemTextView);
         _textView.setHorizontallyScrolling(true);
-        _textView.setTextSize(TEXT_SIZE);
+        _textView.setTextSize(TEXT_SIZE_TITLE);
         _textView.setMaxLines(MAX_LINES);
         _textView.setText(_list.get(i).getName());
+
+        TextView _dateTextView = (TextView) _view.findViewById(R.id.eventList_dateTextView);
+        _dateTextView.setTextSize(TEXT_SIZE_DATE);
+        _dateTextView.setText(_list.get(i).getFormatStartDate() + " " + TILDE + " " + _list.get(i).getFormatEndDate());
         return _view;
     }
 }

@@ -6,4 +6,6 @@ package tw.louislu.taccount.Model;
  */
 
 public class Expense {
+
+    public Expense(){}
 }

@@ -10,6 +10,12 @@
         android:id="@+id/eventList_itemTextView"
         android:scrollHorizontally="true"
         android:maxLines="2"
-        android:layout_marginTop="@dimen/list_item_margin"
-        android:layout_marginBottom="@dimen/list_item_margin" />
+        android:layout_marginTop="@dimen/list_item_margin" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/eventList_dateTextView"
+        android:layout_marginBottom="@dimen/list_item_margin"
+        android:layout_marginTop="@dimen/list_item_date_margin" />
 </LinearLayout>

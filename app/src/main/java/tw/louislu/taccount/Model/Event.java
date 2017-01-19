@@ -1,19 +1,27 @@
 package tw.louislu.taccount.Model;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created on 2017/1/15.
  * Author: Louis Lu
  */
 
-public class Event {
+public class Event implements Serializable {
     private static final String REGEX_SLASH = "/";
+    private static final String FORMAT_DATE = "yyyy/MM/dd";
+    private int _id;
     private String _name;
+    private Calendar _calendar = Calendar.getInstance();
     private Date _startDate;
     private Date _endDate;
-    private Calendar _calendar = Calendar.getInstance();
+    private List<Expense> _expenses = new ArrayList<Expense>();
 
     public Event(){
         this._name = "default";
@@ -36,6 +44,12 @@ public class Event {
         return _calendar.getTime();
     }
 
+    //取得yyyy/MM/dd格式的日期字串
+    private String getFormatDate(Date date){
+        SimpleDateFormat _simpleDateFormat = new SimpleDateFormat(FORMAT_DATE, Locale.TAIWAN);
+        return _simpleDateFormat.format(date);
+    }
+
     public String getName(){
         return _name;
     }
@@ -48,6 +62,10 @@ public class Event {
         return _startDate;
     }
 
+    public String getFormatStartDate(){
+        return getFormatDate(_startDate);
+    }
+
     public void setStartDate(String date){
         this._startDate = getDateByString(date);
     }
@@ -56,7 +74,19 @@ public class Event {
         return _endDate;
     }
 
+    public String getFormatEndDate(){
+        return getFormatDate(_endDate);
+    }
+
     public void setEndDate(String date){
         this._endDate = getDateByString(date);
+    }
+
+    public int getId(){
+        return _id;
+    }
+
+    public void setId(int id){
+        this._id = id;
     }
 }

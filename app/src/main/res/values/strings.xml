@@ -15,6 +15,15 @@
     <string name="string_dateErrorMessage">開始日期不得晚於結束日期</string>
     <string name="string_eventNameErrorTitle">錯誤名稱</string>
     <string name="string_eventNameErrorMessage">名稱不得為空白</string>
-    
+
+    <string name="string_tabName_expense">支出</string>
+    <string name="string_tabName_wallet">錢包</string>
+    <string name="string_tabName_calc">統計</string>
+    <string name="string_tabName_setting">設定</string>
+
     <string name="string_new_taiwan_dollar">新臺幣</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_expenses_fragment">Hello expenses fragment</string>
+    <string name="hello_wallet_fragment">Hello wallet fragment</string>
 </resources>

@@ -21,6 +21,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import tw.louislu.taccount.Model.Event;
+
 public class NewEventActivity extends AppCompatActivity {
     private static final String TAG = "Debug_Message";
     private static final int ZERO = 0;
@@ -40,7 +42,6 @@ public class NewEventActivity extends AppCompatActivity {
         initFindViewById();
         setDefaultDate();
         checkEventName();
-
     }
 
     //初始化工具列(ActionBar)
@@ -167,10 +168,11 @@ public class NewEventActivity extends AppCompatActivity {
 
     //建立使用者輸入的資料的Bundle
     private Bundle getDataBundle(){
+        Event _event = new Event(_eventNameEditText.getText().toString(),
+                _eventStartDateEditText.getText().toString(),
+                _eventEndDateEditText.getText().toString());
         Bundle _bundle = new Bundle();
-        _bundle.putString(MainActivity.KEY_EVENT_NAME, _eventNameEditText.getText().toString());
-        _bundle.putString(MainActivity.KEY_EVENT_START_DATE, _eventStartDateEditText.getText().toString());
-        _bundle.putString(MainActivity.KEY_EVENT_END_DATE, _eventEndDateEditText.getText().toString());
+        _bundle.putSerializable(MainActivity.KEY_EVENT, _event);
         return _bundle;
     }
 
