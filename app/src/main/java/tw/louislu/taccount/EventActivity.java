@@ -17,7 +17,6 @@ public class EventActivity extends AppCompatActivity {
     private static final int ZERO = 0;
     private Event _event;
     private FragmentTabHost _tabHost;
-    private ActionBar _actionBar;
     private MenuItem _newExpensesMenuItem;
 
     @Override
@@ -34,9 +33,9 @@ public class EventActivity extends AppCompatActivity {
     private void initToolBar(){
         Toolbar toolBar = (Toolbar) findViewById(R.id.event_Toolbar);
         setSupportActionBar(toolBar);
-        _actionBar = getSupportActionBar();
-        _actionBar.setDisplayHomeAsUpEnabled(true);
-        _actionBar.setTitle(_event.getName());
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(_event.getName());
     }
 
     //初始化及設定TabHost
@@ -44,9 +43,9 @@ public class EventActivity extends AppCompatActivity {
         _tabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         _tabHost.setup(this, getSupportFragmentManager(), R.id.container);
         final String _expense = getString(R.string.string_tabName_expense);
-        String _wallet = getString(R.string.string_tabName_wallet);
-        String _calc = getString(R.string.string_tabName_calc);
-        String _setting = getString(R.string.string_tabName_setting);
+        final String _wallet = getString(R.string.string_tabName_wallet);
+        final String _calc = getString(R.string.string_tabName_calc);
+        final String _setting = getString(R.string.string_tabName_setting);
         _tabHost.addTab(_tabHost.newTabSpec(_expense).setIndicator(_expense), ExpensesFragment.class, null);
         _tabHost.addTab(_tabHost.newTabSpec(_wallet).setIndicator(_wallet), WalletFragment.class, null);
         _tabHost.addTab(_tabHost.newTabSpec(_calc).setIndicator(_calc), StatisticsFragment.class, null);
