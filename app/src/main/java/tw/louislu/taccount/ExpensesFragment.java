@@ -15,7 +15,7 @@ import android.view.ViewGroup;
  * A simple {@link Fragment} subclass.
  */
 public class ExpensesFragment extends Fragment {
-
+    private static final float TEXT_SIZE = 24;
 
     public ExpensesFragment() {
         // Required empty public constructor

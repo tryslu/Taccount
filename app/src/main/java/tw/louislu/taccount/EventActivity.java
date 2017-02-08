@@ -80,4 +80,19 @@ public class EventActivity extends AppCompatActivity {
         _newExpensesMenuItem = menu.getItem(ZERO);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()){
+            case R.id.action_new:
+                // New Expense
+                try{
+
+                }catch (Exception e){}
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

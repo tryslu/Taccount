@@ -5,9 +5,58 @@
     tools:context="tw.louislu.taccount.ExpensesFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_expenses_fragment" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/expenses_dateTextView"
+            android:text="@string/string_date"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:paddingTop="@dimen/date_text_padding"
+            android:paddingBottom="@dimen/date_text_padding" />
+
+        <TextView
+            android:text="@string/string_today_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/expenses_todayTotalTextView"
+            android:textSize="24sp"
+            android:gravity="left|start"
+            android:layout_below="@+id/expenses_dateTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingStart="@dimen/text_padding"
+            android:paddingEnd="@dimen/text_padding"
+            android:paddingTop="@dimen/text_padding"
+            android:paddingBottom="@dimen/text_padding" />
+
+        <TextView
+            android:text="@string/string_zero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/expenses_dateTextView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/expenses_totalMoneyTextView"
+            android:textSize="24sp"
+            android:gravity="right|end"
+            android:paddingEnd="@dimen/text_padding"
+            android:paddingStart="@dimen/text_padding"
+            android:paddingTop="@dimen/text_padding"
+            android:paddingBottom="@dimen/text_padding" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/expenses_todayTotalTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/expenses_expensesListView" />
+    </RelativeLayout>
 
 </FrameLayout>

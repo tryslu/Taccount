@@ -14,6 +14,7 @@ public class Taccount {
     public Taccount(){}
 
     public void addEvent(Event event){
+        // insert a new event to db
         ((LinkedList<Event>)_eventList).addFirst(event);
     }
 

@@ -50,6 +50,12 @@ public class Event implements Serializable {
         return _simpleDateFormat.format(date);
     }
 
+    //新增一筆支出
+    public void addExpense(String name, int cost, Currency currency){
+        // insert a new expense to db
+        _expenses.add(new Expense(name, cost, currency, _id));
+    }
+
     public String getName(){
         return _name;
     }
