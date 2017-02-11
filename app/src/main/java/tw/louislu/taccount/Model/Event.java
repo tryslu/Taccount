@@ -1,5 +1,7 @@
 package tw.louislu.taccount.Model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class Event implements Serializable {
     private Date getDateByString(String date){
         String[] _split = date.split(REGEX_SLASH);
         _calendar.set(Calendar.YEAR, Integer.valueOf(_split[0]));
-        _calendar.set(Calendar.MONTH, Integer.valueOf(_split[1]));
+        _calendar.set(Calendar.MONTH, Integer.valueOf(_split[1])-1);
         _calendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(_split[2]));
         return _calendar.getTime();
     }
@@ -51,9 +53,17 @@ public class Event implements Serializable {
     }
 
     //新增一筆支出
-    public void addExpense(String name, int cost, Currency currency){
+    public void addExpense(String title, String content, int cost, Currency currency){
         // insert a new expense to db
-        _expenses.add(new Expense(name, cost, currency, _id));
+        _expenses.add(new Expense(title, content, cost, currency, _id));
+    }
+
+    public int getId(){
+        return _id;
+    }
+
+    public void setId(int id){
+        this._id = id;
     }
 
     public String getName(){
@@ -88,11 +98,7 @@ public class Event implements Serializable {
         this._endDate = getDateByString(date);
     }
 
-    public int getId(){
-        return _id;
-    }
-
-    public void setId(int id){
-        this._id = id;
+    public List<Expense> getExpensesList(){
+        return _expenses;
     }
 }

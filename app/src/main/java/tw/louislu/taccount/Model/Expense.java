@@ -7,13 +7,15 @@ package tw.louislu.taccount.Model;
 
 public class Expense {
     private int _id;
-    private String _name;
+    private String _title;
+    private String _content;
     private int _cost;
     private Currency _currency;
     private int _eventId;
 
-    public Expense(String name, int cost, Currency currency, int eventId){
-        this._name = name;
+    public Expense(String title, String content, int cost, Currency currency, int eventId){
+        this._title = title;
+        this._content = content;
         this._cost = cost;
         this._currency = currency;
         this._eventId = eventId;
@@ -27,12 +29,20 @@ public class Expense {
         this._id = id;
     }
 
-    public String getName(){
-        return _name;
+    public String getTitle(){
+        return _title;
     }
 
-    public void setName(String name){
-        this._name = name;
+    public void setTitle(String title){
+        this._title = title;
+    }
+
+    public String getContent(){
+        return _content;
+    }
+
+    public void setContent(String content){
+        this._content = content;
     }
 
     public int getCost(){

@@ -11,11 +11,13 @@
     <string name="string_format_date">yyyy/MM/dd</string>
     <string name="string_finish">完成</string>
     <string name="string_ok">確定</string>
+    <string name="string_cancel">取消</string>
     <string name="string_dateErrorTitle">錯誤日期</string>
     <string name="string_dateErrorMessage">開始日期不得晚於結束日期</string>
     <string name="string_eventNameErrorTitle">錯誤名稱</string>
     <string name="string_eventNameErrorMessage">名稱不得為空白</string>
 
+    <!-- EventActivity Tab host -->
     <string name="string_tabName_expense">支出</string>
     <string name="string_tabName_wallet">錢包</string>
     <string name="string_tabName_calc">統計</string>
@@ -23,11 +25,19 @@
 
     <string name="string_new_taiwan_dollar">新臺幣</string>
 
+    <!-- Expense Fragment -->
     <string name="string_date">日期</string>
     <string name="string_today_total">今日總額：</string>
     <string name="string_zero">0</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- dialog_new_expense -->
+    <string name="string_dialog_title">新增支出</string>
+    <string name="string_dialog_cost">金額</string>
+    <string name="string_dialog_expense_title">名稱(必填)</string>
+    <string name="string_dialog_expense_content">內容描述(可留空)</string>
+    <string name="string_dialog_title_hint">Ex:支出1</string>
+
+    <!--  Remove or change this placeholder text -->
     <string name="hello_expenses_fragment">Hello expenses fragment</string>
     <string name="hello_wallet_fragment">Hello wallet fragment</string>
     <string name="hello_statistics_fragment">Hello statistics fragment</string>

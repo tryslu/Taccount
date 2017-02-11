@@ -1,23 +1,36 @@
 package tw.louislu.taccount;
 
+import android.content.DialogInterface;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TabHost;
 
+import tw.louislu.taccount.Model.Currency;
 import tw.louislu.taccount.Model.Event;
 
 public class EventActivity extends AppCompatActivity {
     private static final int ZERO = 0;
+    private static final int INT_MAX = 2147483647;
+    private static final String STRING_EMPTY = "";
     private Event _event;
     private FragmentTabHost _tabHost;
     private MenuItem _newExpensesMenuItem;
+    private Currency _ntd = new Currency(getString(R.string.string_new_taiwan_dollar)); //暫時
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +86,80 @@ public class EventActivity extends AppCompatActivity {
         }
     }
 
+    //顯示新增支出Dialog
+    private void ShowNewExpenseDialog(){
+        final View _view = LayoutInflater.from(EventActivity.this).inflate(R.layout.dialog_new_expense, null);
+        final EditText _costEditText = (EditText) _view.findViewById(R.id.dialog_costEditText);
+        final EditText _titleEditText = (EditText) _view.findViewById(R.id.dialog_titleEditText);
+        final EditText _contentEditText = (EditText) _view.findViewById(R.id.dialog_contentEditText);
+        final Button _completeButton = (Button) _view.findViewById(R.id.dialog_completeButton);
+        _completeButton.setEnabled(false);
+        _costEditText.setFilters(new InputFilter[]{ new InputFilterMinMax(ZERO, INT_MAX) });
+        _costEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                _completeButton.setEnabled(false);
+                if(charSequence.length() != ZERO){
+                    if(_titleEditText.length() != ZERO){
+                        _completeButton.setEnabled(true);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        _titleEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                _completeButton.setEnabled(false);
+                if(charSequence.length() != ZERO){
+                    if(_costEditText.length() != ZERO){
+                        _completeButton.setEnabled(true);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        _completeButton.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if((_costEditText.length() != ZERO) && (_titleEditText.length() != ZERO)){
+                    _event.addExpense(_titleEditText.getText().toString(),
+                            _contentEditText.getText().toString(),
+                            Integer.parseInt(_costEditText.getText().toString()),
+                            _ntd);
+                }
+            }
+        });
+        new AlertDialog.Builder(EventActivity.this)
+                .setTitle(R.string.string_dialog_title)
+                .setView(_view)
+                .setNegativeButton(R.string.string_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .show();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater _inflater = getMenuInflater();
@@ -88,7 +175,8 @@ public class EventActivity extends AppCompatActivity {
             case R.id.action_new:
                 // New Expense
                 try{
-
+                    // show dialog and get expense title, content, cost
+                    ShowNewExpenseDialog();
                 }catch (Exception e){}
                 return true;
             default:

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/string_dialog_cost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_costTextView"
+        android:textSize="14sp"
+        android:padding="@dimen/text_padding" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/dialog_costEditText"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="@string/string_dialog_expense_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_titleTextView"
+        android:textSize="14sp"
+        android:padding="@dimen/text_padding" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/dialog_titleEditText"
+        android:textAlignment="center"
+        android:hint="@string/string_dialog_title_hint" />
+
+    <TextView
+        android:text="@string/string_dialog_expense_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_contentTextView"
+        android:textSize="14sp"
+        android:padding="@dimen/text_padding" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/dialog_contentEditText" />
+
+    <Button
+        android:text="@string/string_finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_completeButton" />
+</LinearLayout>
