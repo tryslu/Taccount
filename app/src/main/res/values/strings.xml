@@ -37,6 +37,11 @@
     <string name="string_dialog_expense_content">內容描述(可留空)</string>
     <string name="string_dialog_title_hint">Ex:支出1</string>
 
+    <!-- expenses list item -->
+    <string name="string_expenses_list_item_title">支出</string>
+    <string name="string_expenses_list_item_currency">新臺幣</string>
+    <string name="string_expenses_list_item_cost">0 元</string>
+
     <!--  Remove or change this placeholder text -->
     <string name="hello_expenses_fragment">Hello expenses fragment</string>
     <string name="hello_wallet_fragment">Hello wallet fragment</string>

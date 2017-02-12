@@ -9,13 +9,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ExpensesFragment extends Fragment {
-    private static final float TEXT_SIZE = 24;
+    //private static final float TEXT_SIZE = 24;
+    private EventActivity _parent;
+    private ListView _expensesListView;
+    private ExpensesListAdapter _expensesListAdapter;
 
     public ExpensesFragment() {
         // Required empty public constructor
@@ -25,7 +29,7 @@ public class ExpensesFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if(context instanceof Activity){
-            EventActivity _eventActivity = (EventActivity)context;
+            this._parent = (EventActivity)context;
         }
     }
 
@@ -39,5 +43,23 @@ public class ExpensesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initFindViewById();
+        setListAdapter();
+    }
+
+    // 取得View元件
+    private void initFindViewById(){
+        _expensesListView = (ListView) getView().findViewById(R.id.expenses_expensesListView);
+    }
+
+    //設定List Adapter
+    private void setListAdapter(){
+        _expensesListAdapter = new ExpensesListAdapter(_parent.getApplicationContext(), _parent.getExpensesList());
+        _expensesListView.setAdapter(_expensesListAdapter);
+    }
+
+    //通知支出list有變更
+    public void notifyDataSetChanged(){
+        _expensesListAdapter.notifyDataSetChanged();
     }
 }

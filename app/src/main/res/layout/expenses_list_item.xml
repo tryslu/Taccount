@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/string_expenses_list_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/expensesListItem_titleTextView"
+        android:layout_weight="1"
+        android:textSize="24sp"
+        android:padding="@dimen/text_padding" />
+
+    <TextView
+        android:text="@string/string_expenses_list_item_currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/expensesListItem_currencyTextView"
+        android:layout_weight="0"
+        android:textSize="14sp"
+        android:textAlignment="textEnd"
+        android:padding="@dimen/small_text_padding"
+        android:gravity="end" />
+
+    <TextView
+        android:text="@string/string_expenses_list_item_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/expensesListItem_costTextView"
+        android:layout_weight="0"
+        android:textSize="24sp"
+        android:padding="@dimen/text_padding"
+        android:textAlignment="textEnd"
+        android:gravity="end" />
+</LinearLayout>

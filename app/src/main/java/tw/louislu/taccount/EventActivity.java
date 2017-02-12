@@ -1,7 +1,7 @@
 package tw.louislu.taccount;
 
 import android.content.DialogInterface;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.ActionBar;
@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,8 +21,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TabHost;
 
+import java.util.List;
+
 import tw.louislu.taccount.Model.Currency;
 import tw.louislu.taccount.Model.Event;
+import tw.louislu.taccount.Model.Expense;
 
 public class EventActivity extends AppCompatActivity {
     private static final int ZERO = 0;
@@ -30,7 +34,9 @@ public class EventActivity extends AppCompatActivity {
     private Event _event;
     private FragmentTabHost _tabHost;
     private MenuItem _newExpensesMenuItem;
-    private Currency _ntd = new Currency(getString(R.string.string_new_taiwan_dollar)); //暫時
+    private AlertDialog _newExpenseDialog;
+    private String _expenseString, _walletString, _calcString, _settingString;
+    private Currency _ntd = new Currency("新臺幣"); //暫時
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +45,6 @@ public class EventActivity extends AppCompatActivity {
         _event = (Event)getIntent().getExtras().getSerializable(MainActivity.KEY_EVENT);
         initToolBar();
         initTabHost();
-
     }
 
     //初始化工具列(ActionBar)
@@ -53,16 +58,16 @@ public class EventActivity extends AppCompatActivity {
 
     //初始化及設定TabHost
     private void initTabHost(){
+        _expenseString = getString(R.string.string_tabName_expense);
+        _walletString = getString(R.string.string_tabName_wallet);
+        _calcString = getString(R.string.string_tabName_calc);
+        _settingString = getString(R.string.string_tabName_setting);
         _tabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         _tabHost.setup(this, getSupportFragmentManager(), R.id.container);
-        final String _expense = getString(R.string.string_tabName_expense);
-        final String _wallet = getString(R.string.string_tabName_wallet);
-        final String _calc = getString(R.string.string_tabName_calc);
-        final String _setting = getString(R.string.string_tabName_setting);
-        _tabHost.addTab(_tabHost.newTabSpec(_expense).setIndicator(_expense), ExpensesFragment.class, null);
-        _tabHost.addTab(_tabHost.newTabSpec(_wallet).setIndicator(_wallet), WalletFragment.class, null);
-        _tabHost.addTab(_tabHost.newTabSpec(_calc).setIndicator(_calc), StatisticsFragment.class, null);
-        _tabHost.addTab(_tabHost.newTabSpec(_setting).setIndicator(_setting), SettingFragment.class, null);
+        _tabHost.addTab(_tabHost.newTabSpec(_expenseString).setIndicator(_expenseString), ExpensesFragment.class, null);
+        _tabHost.addTab(_tabHost.newTabSpec(_walletString).setIndicator(_walletString), WalletFragment.class, null);
+        _tabHost.addTab(_tabHost.newTabSpec(_calcString).setIndicator(_calcString), StatisticsFragment.class, null);
+        _tabHost.addTab(_tabHost.newTabSpec(_settingString).setIndicator(_settingString), SettingFragment.class, null);
         _tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabSpec) {
@@ -145,10 +150,15 @@ public class EventActivity extends AppCompatActivity {
                             _contentEditText.getText().toString(),
                             Integer.parseInt(_costEditText.getText().toString()),
                             _ntd);
+                    ((ExpensesFragment)getSupportFragmentManager().findFragmentByTag(_expenseString)).notifyDataSetChanged();
+                    if(_newExpenseDialog != null){
+                        if(_newExpenseDialog.isShowing())
+                            _newExpenseDialog.dismiss();
+                    }
                 }
             }
         });
-        new AlertDialog.Builder(EventActivity.this)
+        _newExpenseDialog = new AlertDialog.Builder(EventActivity.this)
                 .setTitle(R.string.string_dialog_title)
                 .setView(_view)
                 .setNegativeButton(R.string.string_cancel, new DialogInterface.OnClickListener() {
@@ -158,6 +168,11 @@ public class EventActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    //取得事件的支出list
+    public List<Expense> getExpensesList(){
+        return _event.getExpensesList();
     }
 
     @Override
